@@ -1,13 +1,17 @@
 require 'sinatra'
+configure { set :server, :puma}
 require 'pry'
 
-@@foo = 'bar'
+class FindMyFriends < Sinatra::Application
+  @@database = {}
 
-get '/' do
-  "#{@@foo}"
-end
+  get '/' do
+    "#{@@database}"
+  end
 
-post '/' do
-  binding.pry
-  @@foo = params['name']
+  post '/' do
+    params = JSON.parse(request.body.read)
+    @@database[params['name']] = { 'lat': params['lat'], 'lng': params['lng'] }
+    {status: 'Okay'}.to_json
+  end
 end
