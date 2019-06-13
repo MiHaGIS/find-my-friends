@@ -10,7 +10,10 @@ class TypeInYourName extends React.Component {
   };
 
   render() {
-    return <input type="text" placeholder="user..." onKeyPress={this.onKeypress}/>
+    return <div>
+      <h1>Enter your name below to begin...</h1>
+      <input type="text" placeholder="your name goes here..." onKeyPress={this.onKeypress}/>
+    </div>
   };
 }
 
