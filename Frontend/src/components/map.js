@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom'
-import { Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import { Map, Marker, Popup, WMSTileLayer} from 'react-leaflet'
 import L from 'leaflet'
 
 function Markers(props) {
@@ -45,13 +45,13 @@ class MapDisplay extends React.Component {
   }
 
   render() {
-    return <div><h1>Hello, {this.props.name}.</h1>
+    return <div>
+    <h1>Hello, { this.props.name }.</h1>
     <Map center={this.state.position} zoom={13} id="mapid">
-      <TileLayer url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
-        attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-        maxZoom="18"
-        id= 'mapbox.streets'
-        accessToken= 'pk.eyJ1IjoibWloYWdpcyIsImEiOiJjanR5bWxld3YyZG9vNDRxbmlkMTRuOGVrIn0.IMviALsHDa4NJlHVvxbBuw'
+      <WMSTileLayer url="http://localhost:8080/geoserver/gwc/service/wms?"
+        layers="os_zoomstack-night"
+        format="image/png"
+        transparent="true"
       />
       <Markers users={people}/>
     </Map>

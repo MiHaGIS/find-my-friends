@@ -3,7 +3,7 @@ import React from 'react';
 class TypeInYourName extends React.Component {
 
   onKeypress = (event) => {
-    if (event.key == "Enter") {
+    if (event.key === "Enter") {
       this.props.NameTypedIn(event.target.value.trim())
       console.log("I have been summoned")
     };
