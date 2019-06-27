@@ -1,28 +1,27 @@
 import React from 'react';
 import { render } from 'react-dom'
-import { Map, Marker, Popup, WMSTileLayer} from 'react-leaflet'
+import { Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import L from 'leaflet'
 
 function Markers(props) {
-  const markers = props.users.map((user) =>
-    <Marker position={[user.lat, user.lng]}>
-      <Popup>{user.name}</Popup>
+  const markers = Object.entries(props.users).map(([person, location]) =>
+    <Marker position={[location.lat, location.lng]} key={person}>
+      <Popup>{person}</Popup>
     </Marker>
   )
   return markers
 }
 
-const people = [ // this from a server
-  {
-    "name": "Mike",
-    "lat": 50.820,
-    "lng": -0.137
-  },{
-    "name": "Rainer",
-    "lat": 50.825,
-    "lng": -0.132
+const people = {
+    "Mike":{
+      "lat": 50.820,
+      "lng": -0.137
+    },
+    "Rainer": {
+      "lat": 50.825,
+      "lng": -0.132
+    }
   }
-]
 
 class MapDisplay extends React.Component {
   constructor() {
@@ -46,15 +45,16 @@ class MapDisplay extends React.Component {
 
   render() {
     return <div>
-    <h1>Hello, { this.props.name }.</h1>
-    <Map center={this.state.position} zoom={13} id="mapid">
-      <WMSTileLayer url="http://localhost:8080/geoserver/gwc/service/wms?"
-        layers="os_zoomstack-night"
-        format="image/png"
-        transparent="true"
-      />
-      <Markers users={people}/>
-    </Map>
+      <h1>Hello, { this.props.name }.</h1>
+      <Map center={this.state.position} zoom={13} id="mapid">
+        <TileLayer url="https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}"
+          attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+          maxZoom="18"
+          id= 'mapbox.streets'
+          accessToken= 'pk.eyJ1IjoibWloYWdpcyIsImEiOiJjanR5bWxld3YyZG9vNDRxbmlkMTRuOGVrIn0.IMviALsHDa4NJlHVvxbBuw'
+        />
+        <Markers users={people}/>
+      </Map>
     </div>
   }
 }

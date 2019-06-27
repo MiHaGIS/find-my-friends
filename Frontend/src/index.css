@@ -5,7 +5,6 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   background-color: #333333;
-  height: 100%;
 }
 
 code {
@@ -28,7 +27,7 @@ input {
   padding: 0 20px;
   border-radius: 40px;
   width: auto;
-  background-color: #333333
+  background-color: #333333;
 }
 
 .leaflet-container {
