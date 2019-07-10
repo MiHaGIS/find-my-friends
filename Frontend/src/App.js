@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       name: "User..",
       lat: 0,
-      lng: 0
+      lng: 0,
+      loggedIn: false
     };
   }
 
@@ -25,10 +26,9 @@ class App extends Component {
   };
 
   enterName = (name) => {
-    this.setState({name: name}, this.update_location)
+    this.setState({name: name, loggedIn:name}, this.update_location)
     console.log("EnterName has been called!")
   };
-
 
 
   componentDidMount() { //make a call to a server and fetch the locations
@@ -47,8 +47,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TypeInYourName name={this.state.name} NameTypedIn={this.enterName}/>
-        <MapDisplay name={this.state.name}/>
+        <div className={this.state.loggedIn ? 'slide-out' : ''}>
+          <TypeInYourName name={this.state.name} NameTypedIn={this.enterName}/>
+        </div>
+        <div className={this.state.loggedIn ? 'slide-in' : 'map-display'}>
+          <MapDisplay name={this.state.name}/>
+        </div>
       </div>
     );
   }
