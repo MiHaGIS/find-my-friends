@@ -19,7 +19,7 @@ class FindMyFriends < Sinatra::Application
   end
 
   get '/' do
-    "#{@@database}"
+    @@database.to_json
   end
 
   post '/' do

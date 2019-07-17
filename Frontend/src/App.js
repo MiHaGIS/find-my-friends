@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   update_location() {
-    fetch('http://10.20.111.46:9292', {
+    fetch('http://192.168.0.20:9292', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({name: this.state.name, lat: this.state.lat, lng: this.state.lng})

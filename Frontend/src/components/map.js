@@ -12,16 +12,11 @@ function Markers(props) {
   return markers
 }
 
-const people = {
-    "Mike":{
-      "lat": 50.820,
-      "lng": -0.137
-    },
-    "Rainer": {
-      "lat": 50.825,
-      "lng": -0.132
-    }
-  }
+const people = fetch(
+    'http://192.168.0.20:9292'
+  ).then(function(data) {
+    return data.json();
+  });
 
 class MapDisplay extends React.Component {
   constructor() {
