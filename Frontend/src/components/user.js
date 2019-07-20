@@ -1,11 +1,15 @@
 import React from 'react';
 
+String.prototype.capatalize = function() {
+  return this.charAt(0).toUpperCase() +
+    this.substring(1).toLowerCase()
+}
+
 class TypeInYourName extends React.Component {
 
   onKeypress = (event) => {
     if (event.key === "Enter") {
-      this.props.NameTypedIn(event.target.value.trim())
-      console.log("I have been summoned")
+      this.props.NameTypedIn(event.target.value.trim().capatalize())
     };
   };
 

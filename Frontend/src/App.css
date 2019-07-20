@@ -38,15 +38,13 @@
 
 @keyframes slidein {
   0% {
-    margin-left: 100%;
-    height: 300%;
-    transform: rotate(2880deg);
+    /*margin-left: 100%;*/
+    /*height: 300%;*/
   }
 
   100% {
     margin-left: 0%;
     height: 100%;
-    transform: rotate(0deg)
   }
 }
 
@@ -69,7 +67,7 @@
 
 .slide-out {
   animation-name: slideout;
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-fill-mode: forwards;
   overflow:hidden;
 }

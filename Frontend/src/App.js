@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import MapDisplay from './components/map.js'
 import TypeInYourName from './components/user.js'
@@ -51,7 +50,9 @@ class App extends Component {
           <TypeInYourName name={this.state.name} NameTypedIn={this.enterName}/>
         </div>
         <div className={this.state.loggedIn ? 'slide-in' : 'map-display'}>
-          <MapDisplay name={this.state.name}/>
+          <MapDisplay name={this.state.name} 
+            lat={this.state.lat}
+            lng={this.state.lng}/>
         </div>
       </div>
     );

@@ -7,23 +7,23 @@ function Markers(props) {
   const markers = Object.entries(props.users).map(([person, location]) =>
     <Marker position={[location.lat, location.lng]} key={person}>
       <Popup>{person}</Popup>
-    </Marker>
-  )
+    </Marker>);
   return markers
-}
-
-const people = fetch(
-    'http://192.168.0.20:9292'
-  ).then(function(data) {
-    return data.json();
-  });
+};
 
 class MapDisplay extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      position: [50.82, -0.14]
+      position: [this.props.lat, this.props.lng],
+      people: {}
     };
+  }
+
+  componentWillMount() {
+    fetch('http://192.168.0.20:9292')
+      .then(response => response.json())
+      .then(data => this.setState({people: data}));
   }
 
   componentDidMount() { //make a call to a server and fetch the locations
@@ -48,7 +48,7 @@ class MapDisplay extends React.Component {
           id= 'mapbox.streets'
           accessToken= 'pk.eyJ1IjoibWloYWdpcyIsImEiOiJjanR5bWxld3YyZG9vNDRxbmlkMTRuOGVrIn0.IMviALsHDa4NJlHVvxbBuw'
         />
-        <Markers users={people}/>
+        <Markers users={this.state.people}/>
       </Map>
     </div>
   }
